@@ -125,12 +125,17 @@ const Agent = ({
         dynamicGenerator.model.tools[0].server.url = `${origin}/api/vapi/generate`;
       }
       
-      await vapi.start(dynamicGenerator, {
-        variableValues: {
-          username: userName,
-          userid: userId,
-        },
-      });
+      try {
+        await vapi.start(dynamicGenerator, {
+          variableValues: {
+            username: userName || "Guest",
+            userid: userId || "Unknown",
+          },
+        });
+      } catch (err: any) {
+        console.error("VAPI START ERROR:", err);
+        alert("VAPI Error: " + JSON.stringify(err?.error?.message || err?.error || err));
+      }
     } else {
       let formattedQuestions = "";
       if (questions) {

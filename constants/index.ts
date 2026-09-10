@@ -155,6 +155,14 @@ End the conversation on a polite and positive note.
   },
 };
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+console.log("BASE URL:", baseUrl);
+
+console.log(
+  "VAPI TOOL URL:",
+  `${baseUrl}/api/vapi/generate`
+);
 export const generator: CreateAssistantDTO = {
   name: "Interview Generator",
   firstMessage: "Hi there! I'm here to help you set up your mock interview. What role are you preparing for?",
