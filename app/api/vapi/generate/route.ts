@@ -9,6 +9,9 @@ export async function POST(request: Request) {
   const body = await request.json();
   console.log("Vapi Payload:", JSON.stringify(body, null, 2));
   
+  const { searchParams } = new URL(request.url);
+  let urlUserId = searchParams.get("userid");
+
   let params = body;
   let toolCallId;
   
@@ -22,6 +25,8 @@ export async function POST(request: Request) {
   }
   
   let { type, role, level, techstack, amount, userid } = params;
+
+  if (!userid) userid = urlUserId;
 
   if (!userid && body.message?.call?.variableValues?.userid) {
     userid = body.message.call.variableValues.userid;
