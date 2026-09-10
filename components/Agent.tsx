@@ -119,14 +119,8 @@ const Agent = ({
     setCallStatus(CallStatus.CONNECTING);
 
     if (type === "generate") {
-      const dynamicGenerator = JSON.parse(JSON.stringify(generator));
-      const origin = typeof window !== "undefined" ? window.location.origin : process.env.NEXT_PUBLIC_BASE_URL;
-      if (dynamicGenerator.model?.tools?.[0]?.server) {
-        dynamicGenerator.model.tools[0].server.url = `${origin}/api/vapi/generate`;
-      }
-      
       try {
-        await vapi.start(dynamicGenerator, {
+        await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
           variableValues: {
             username: userName || "Guest",
             userid: userId || "Unknown",
