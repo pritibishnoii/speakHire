@@ -198,7 +198,8 @@ Ask for these one by one naturally in a conversational tone. Once you have all 5
         },
         server: {
           url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/vapi/generate`
-        }
+        },
+        async: false
       }
     ]
   }
